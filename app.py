@@ -288,14 +288,14 @@ def maini():
                                 else:
                                     file_id = fs.put(file_data, filename=uploaded_file.name,metadata={"filename":uploaded_file.name,"name": name, "course": optionm, "description": description,'id':st.session_state['userid'],'option':option,'flag':flag,'dead':dt})
                                     st.success(f"📁 File saved to MongoDB with ID: {file_id}")
-
-                    else:
-                        if option=='Learning Content':
-                            m.insert_one({"name": name, "course": optionm, "description": description,'id':st.session_state['userid'],'option':option})
-                            st.success(f"✅ Uploaded")
+                    
                         else:
-                            m.insert_one({"name": name, "course": optionm, "description": description,'id':st.session_state['userid'],'option':option,'flag':flag,'dead':dt})
-                            st.success(f"✅ Uploaded")
+                            if option=='Learning Content':
+                                m.insert_one({"name": name, "course": optionm, "description": description,'id':st.session_state['userid'],'option':option})
+                                st.success(f"✅ Uploaded")
+                            else:
+                                m.insert_one({"name": name, "course": optionm, "description": description,'id':st.session_state['userid'],'option':option,'flag':flag,'dead':dt})
+                                st.success(f"✅ Uploaded")
 
             if option=='Assesment':
                 choice = st.selectbox("Type of Question",('Descriptive','MCQ','More than One Answer MCQ','True or False'))
