@@ -3,6 +3,6 @@ langchain-openai
 langchain-core
 langchain
 streamlit
-gridfs-fuse
+
 pybase64
 datetime
