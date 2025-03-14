@@ -67,8 +67,10 @@ def reg(x):
                 st.warning("Please enter both userid and password.")
 
 def display_pdf(pdf_bytes):
-    with open("temp.pdf", "wb") as f:
-        f.write(pdf_bytes.read())
+    base64_pdf = base64.b64encode(pdf_data).decode("utf-8")
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="800"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
     
     pdf_url = "temp.pdf"
     st.markdown(f'<iframe src="{pdf_url}" width="100%" height="800px"></iframe>', unsafe_allow_html=True)
@@ -98,7 +100,7 @@ def retrival(c,i,o):
         print(file_id)
         pdf_data = fs.get(file_id)
         if results[0]['metadata']['filename'].split(".")[1]=='pdf':
-            display_pdf(pdf_data)
+            display_pdf(pdf_data.read())
         st.download_button(label="Download PDF", data=pdf_data, file_name=selected_filename)    
     
 
@@ -132,7 +134,7 @@ def retrivala(c,i):
         file_id = results[0]['_id']
         pdf_data = fs.get(file_id).read()
         if results[0]['filename'].split(".")[1]=='pdf':
-            display_pdf(pdf_data)
+            display_pdf(pdf_data.read())
         # Convert to bytes and display
         st.download_button(label="Download PDF", data=pdf_data, file_name=selected_filename)
         print('r')
