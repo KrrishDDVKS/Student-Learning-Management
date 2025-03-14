@@ -2,7 +2,7 @@ pymongo
 langchain-openai
 langchain-core
 langchain
-Streamlit1.32
+streamlit==1.33.0
 
 pybase64
 datetime
