@@ -3,7 +3,7 @@ langchain-openai
 langchain-core
 langchain
 streamlit
-gridfs
+gridfs fuse
 io
 base64
 datetime
