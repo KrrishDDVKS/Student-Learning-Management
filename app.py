@@ -249,6 +249,7 @@ def maini():
             key_values = [doc['course'] for doc in documents if 'course' in doc]
         optionm = st.selectbox("Course",(key_values))
         name=st.text_input("Enter the module name")
+        e=1
         existing_file = db.fs.files.find_one({"metadata.name": name})
         e=m.find_one({"name":name})
         if existing_file is not None or e is not None:
