@@ -66,7 +66,7 @@ def logout():
     st.session_state["rerun"] = True
     st.rerun()
 
-openai.api_key = st.secrets["OPEN_API_KEY"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 def get_embedding(text, model="text-embedding-3-small"):
     response = openai.embeddings.create(
