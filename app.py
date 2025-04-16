@@ -812,11 +812,11 @@ def mains():
             
     elif page == "Course Recom":
 
-        llm=ChatOpenAI(api_key=st.secrets["OPEN_API_KEY"],                            #st.secrets["OPEN_API_KEY"]
+        llm=ChatOpenAI(api_key=st.secrets["OPENAI_API_KEY"],                            #st.secrets["OPEN_API_KEY"]
                    model_name='gpt-4o',
                    temperature=0.0)
-        if "message" not in st.session_state:
-            st.session_state["message"] = [{"role": "assistant", "content": "Enter your profession to get course recommendations:"}]
+        if "ms" not in st.session_state:
+            st.session_state["ms"] = [{"role": "assistant", "content": "Enter your profession to get course recommendations:"}]
 
         st.title("Course Recommendation System")
         documents=collection1.find({},{'course':1,'_id':0})
@@ -828,16 +828,18 @@ def mains():
         {context}'''
         PROMPT = PromptTemplate(
         template=prompt_template, input_variables=["context","key_values"])
-        
-        for msg in st.session_state.message:
-            st.chat_message(msg["role"]).write(msg["content"])
 
+        answer='Enter the profession to take the regarding courses'
+        st.session_state.ms.append({"role": "assistant", "content": answer})
+        st.chat_message("assistant").write(answer)
+        
         if prompt := st.chat_input():
+            st.session_state.ms.append({"role": "user", "content": prompt})
+            st.chat_message("user").write(prompt)
             formatted_prompt={"context":prompt, "key_values":", ".join(key_values)}
             chain = LLMChain(llm=llm, prompt=PROMPT).run(formatted_prompt)
-            st.session_state["messages"][st.session_state['userid']].append({"role": "assistant", "content": chain})
+            st.session_state.ms.append({"role": "assistant", "content": chain})
             st.chat_message("assistant").write(chain)
-
         
     elif page == "Prof Recom":
         st.title("Prof Recommendation System")
@@ -870,6 +872,8 @@ def mains():
 
     if st.button("Logout"):
         logout()
+
+
 
 
 # Main app interface Admin
