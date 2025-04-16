@@ -44,9 +44,9 @@ if "logged_in" not in st.session_state:
     st.session_state["userid"] = ""
     st.session_state["role"] = ""
 if "messages" not in st.session_state:
-        st.session_state.messages = {}  # Store chat history per user
+    st.session_state.messages = {}  # Store chat history per user
 if "admin_joined" not in st.session_state:
-        st.session_state.admin_joined = {}
+    st.session_state.admin_joined = {}
 if 'mar' not in st.session_state:
     st.session_state.mar=0
 if 'mark' not in st.session_state:
@@ -57,6 +57,8 @@ if 'descriptive' not in st.session_state:
     st.session_state.descriptive=0
 if 'call' not in st.session_state:
     st.session_state.call=0
+if 'ms' not in st.session_state:
+    st.session_state.admin_joined = {}
 
 #Logout Function
 def logout():
@@ -66,7 +68,7 @@ def logout():
     st.session_state["rerun"] = True
     st.rerun()
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+openai.api_key = st.secrets["OPEN_API_KEY"]
 
 def get_embedding(text, model="text-embedding-3-small"):
     response = openai.embeddings.create(
