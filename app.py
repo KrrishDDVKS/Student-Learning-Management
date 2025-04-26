@@ -139,7 +139,7 @@ def retrival(c,i,o):
         pdf_data = fs.get(file_id)
         if results[0]['metadata']['filename'].split(".")[1]=='pdf':
             display_pdf(pdf_data.read())
-        st.download_button(label="Download PDF", data=pdf_data.read(), file_name=selected_filename)    
+        st.download_button(label="Download", data=pdf_data.read(), file_name=selected_filename)    
     
 
     n=m.find_one({"name":selected_filename})
@@ -679,13 +679,17 @@ def mains():
             i=ins['instructor']
             mas=retrival(c,i,page)
 
-        uploaded_file = st.file_uploader("Upload a PDF file", type=[])
+        uploaded_file = st.file_uploader("Upload a file", type=[])
+        
         if st.button('upload'):
             if uploaded_file is not None:
-                file_data = uploaded_file.read()
-                display_pdf(file_data)
-                file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
-                st.success(f"📁 File saved to MongoDB with ID: {file_id}")
+                if uploaded_file.type=="application/pdf":
+                    st.error("PDF files are not able to dislay on cloud. Please upload a different file type.")
+                else:
+                    file_data = uploaded_file.read()
+                    display_pdf(file_data)
+                    file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
+                    st.success(f"📁 File saved to MongoDB with ID: {file_id}")
 
     elif page == "Assesment":
         st.title("Assesment")
