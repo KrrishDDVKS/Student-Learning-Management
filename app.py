@@ -554,16 +554,16 @@ def maini():
         a=[]
         if pdf_files is not None:
             for i in pdf_files:
-                a.append(i['filename'])    
+                a.append(i['filename'])  
         selected_filename = st.selectbox("Select a PDF to View",a)
         file_id = dba.fs.files.find_one({"filename":selected_filename}, {"_id": 1})
         
         if file_id is not None:
-            pdf_data = fsa.get(file_id['_id']).read()
+            data = fsa.get(file_id['_id']).read()
             if 'pdf' in selected_filename.split('.'):
-                display_pdf(pdf_data)
-        # Convert to bytes and display
-        st.download_button(label="Download PDF", data=pdf_data, file_name=selected_filename)
+                display_pdf(data)
+            # Convert to bytes and display
+            st.download_button(label="Download", data=data, file_name=selected_filename)
 
     elif page == "Roll Call":
         st.title("Roll Call")
