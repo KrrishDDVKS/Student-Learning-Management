@@ -126,8 +126,9 @@ def retrival(c,i,o):
     n=m.find({'id':i,'option':o},{"name":1})
     if n is not None:
         for f in n:
-            module.append(f['name'])
-        selected_filename = st.selectbox("Select a PDF to View",module)
+            if f['course']==c and f['id']==i and f['option']==o:
+                module.append(f['name'])
+        selected_filename = st.selectbox("Select a file to View",module)
 
     query = {"metadata.name": selected_filename}
     results = list(db.fs.files.find(query, {"metadata": 1}))
