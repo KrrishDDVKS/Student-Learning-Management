@@ -544,9 +544,9 @@ def maini():
                 metadata = file.get("metadata", {})
                 if metadata['course']==optionm and  metadata['option']=='Assignment' and metadata['id']==st.session_state['userid']:
                     module.append(metadata['name'])
-        n=m.find({},{"name":1,'_id':0,'course':1,'id':1,'option':1})
+        n=list(m.find({},{"name":1,'_id':0,'course':1,'id':1,'option':1}))
 
-        if n is not None:
+        if n !=[]:
             for f in n:
                 if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['userid']:
                     module.append(f['name'])
@@ -693,6 +693,7 @@ def mains():
                     #display_pdf(file_data)
                     file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
                     st.success(f"📁 File saved to MongoDB with ID: {file_id}")
+                    
 
     elif page == "Assesment":
         st.title("Assesment")
