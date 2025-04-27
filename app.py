@@ -212,9 +212,9 @@ def retrivala(c,ins):
                     st.write(n['description'])
                     ans=st.text_area('Enter the Answer')
                     if st.button('answer'):
-                        ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag']})
+                        ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag'],'tmark':n['tmark']})
                         embedding1 = get_embedding(ans)
-                        st.rerun()
+                        
                         if n['flag']:
                             embedding2 = get_embedding(n['ans'])
                             similarity_score = cosine_similarity(embedding1, embedding2)
@@ -611,16 +611,17 @@ def maini():
         if documents is not None:
             key_values = [doc['course'] for doc in documents if 'course' in doc]
         optionm = st.selectbox("Course",(key_values))
-        x=list(ansd.find({'flag':False,'course':optionm,'ins':st.session_state["userid"]},{'_id':0,'question':1,'ans':1}))
+        x=list(ansd.find({'flag':False,'course':optionm,'ins':st.session_state["userid"]},{'_id':0,'question':1,'ans':1,'id':1,'tmark':1}))
 
         for i in x:
             st.write(f'{i["question"]}')
             st.write(f'Ans: {i["ans"]}')
-            st.text_input('marks')
+            st.text_input(f'marks out of {i['tmark']}')
+            stu=i['id']
         if st.button('Grade'):
             st.session_state.descriptive=st.session_state.descriptive+1
             ansd.find({'flag':False,'course':optionm,'ins':st.session_state["userid"],'question':i["question"],'ans':i["ans"]},{'_id':0,'id':1})
-            ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':st.session_state['userid'],'Marks':st.session_state.mar})
+            ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
 
         
     elif page == "Customer Care":
