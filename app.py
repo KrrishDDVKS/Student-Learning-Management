@@ -689,11 +689,11 @@ def mains():
                 if uploaded_file.type=="application/pdf":
                     st.error("PDF files are not able to dislay on cloud. Please upload a different file type.")
                 else:
-                    doc=dba.fsa.files.find_one({},{'filename':1})
+                    doc=dba.fs.files.find_one({},{'filename':1})
                     if doc is None:
                         file_data = uploaded_file.read()
                         #display_pdf(file_data)
-                        file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
+                        file_id = fs.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
                         st.success(f"📁 File saved to MongoDB with ID: {file_id}")
                     else:    
                         filename = doc.get('filename', '')
