@@ -163,7 +163,7 @@ def retrivala(c,ins):
     if n is not None:
         for f in n:
             module.append(f['name'])
-        selected_filename = st.selectbox("Select a PDF to View",module)
+        selected_filename = st.selectbox("Select the Question",module)
         
     if a.find_one({'course':c,'ins':ins,'mod':selected_filename,'id':st.session_state['userid']}) is None:
         
