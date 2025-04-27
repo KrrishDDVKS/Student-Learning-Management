@@ -690,7 +690,7 @@ def mains():
                     st.error("PDF files are not able to dislay on cloud. Please upload a different file type.")
                 else:
                     doc=dba.fsa.files.find_one({},{'filename':1})
-                    if doc:
+                    if doc is None:
                         filename = doc.get('filename', '')
                         file_base = filename.split('.')[-1]
                         st.write(file_base)  # filename without extension
