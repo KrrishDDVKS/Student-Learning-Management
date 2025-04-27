@@ -545,9 +545,10 @@ def maini():
                 if metadata['course']==optionm and  metadata['option']=='Assignment' and metadata['id']==st.session_state['user_id']:
                     module.append(metadata['name'])
         n=m.find({},{"name":1})
-        st.write(n)
+
         if n is not None:
             for f in n:
+                st.write(f)
                 if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['user_id']:
                     module.append(f['name'])
         selected_filename = st.selectbox("Select module",module)
