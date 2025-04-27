@@ -691,6 +691,11 @@ def mains():
                 else:
                     doc=dba.fsa.files.find_one({},{'filename':1})
                     if doc is None:
+                        file_data = uploaded_file.read()
+                        #display_pdf(file_data)
+                        file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
+                        st.success(f"📁 File saved to MongoDB with ID: {file_id}")
+                    else:    
                         filename = doc.get('filename', '')
                         file_base = filename.split('.')[-1]
                         st.write(file_base)  # filename without extension
