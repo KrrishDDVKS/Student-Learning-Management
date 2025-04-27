@@ -37,27 +37,27 @@ ansd=db["Ansd"]
 fs = gridfs.GridFS(db)
 fsa = gridfs.GridFS(dba)
 # Session state initialization
-if "reg_in" in st.session_state:
+if "reg_in" not in st.session_state:
     st.session_state["reg_in"] = False
-if "logged_in"  in st.session_state:
+if "logged_in"  not in st.session_state:
     st.session_state["logged_in"] = False
     st.session_state["userid"] = ""
     st.session_state["role"] = ""
-if "messages"  in st.session_state:
+if "messages"  not in st.session_state:
     st.session_state.messages = {}  # Store chat history per user
-if "admin_joined"  in st.session_state:
+if "admin_joined"  not in st.session_state:
     st.session_state.admin_joined = {}
-if 'mar'  in st.session_state:
+if 'mar' not in st.session_state:
     st.session_state.mar=0
-if 'mark'  in st.session_state:
+if 'mark' not in st.session_state:
     st.session_state.mark=0
-if 'exam'  in st.session_state:
+if 'exam' not in st.session_state:
     st.session_state.exam=0
-if 'descriptive'  in st.session_state:
+if 'descriptive' not in st.session_state:
     st.session_state.descriptive=0
-if 'call'  in st.session_state:
+if 'call' not in st.session_state:
     st.session_state.call=0
-if "ms"  in st.session_state:
+if "ms" not in st.session_state:
     st.session_state["ms"] = [{"role": "assistant", "content": "Enter your profession to get course recommendations:"}]
 
 #Logout Function
