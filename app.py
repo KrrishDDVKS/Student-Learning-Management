@@ -840,6 +840,7 @@ def mains():
                                     f1=st.checkbox("Can learn a lot")
                             if st.button('submit'):
                                 f.insert_one({'id':st.session_state['userid'],'spec':s,'course':c,'instructor':i,'vi':a1,'vs':b1,'cs':c1,'vc':d1,'agm':e1,'cl':f1})
+                                st.success("Submitted Sucessfully")
                         else:
                             st.warning('Already Submitted')
             
