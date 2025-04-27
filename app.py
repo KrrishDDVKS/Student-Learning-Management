@@ -211,7 +211,7 @@ def retrivala(c,ins):
                 if n['choice']=='Descriptive':
                     st.write(n['description'])
                     ans=st.text_area('Enter the Answer',key='da')
-                    if ans!="":
+                    if st.button('answer'):
                         ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag']})
                         embedding1 = get_embedding(ans)
                         st.session_state['da']=''
