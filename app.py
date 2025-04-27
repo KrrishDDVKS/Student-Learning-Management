@@ -211,12 +211,14 @@ def retrivala(c,ins):
                 if n['choice']=='Descriptive':
                     st.write(n['description'])
                     ans=st.text_area('Enter the Answer')
-                    ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag']})
-                    embedding1 = get_embedding(ans)
-                    if n['flag']:
-                        embedding2 = get_embedding(n['ans'])
-                        similarity_score = cosine_similarity(embedding1, embedding2)
-                        x=1
+                    if ans!="":
+                        ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag']})
+                        embedding1 = get_embedding(ans)
+                        st.rerun()
+                        if n['flag']:
+                            embedding2 = get_embedding(n['ans'])
+                            similarity_score = cosine_similarity(embedding1, embedding2)
+                            x=1
 
                 if n['choice']=='MCQ':
                     ans=st.radio(n['description'],n['a'])
