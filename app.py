@@ -620,8 +620,11 @@ def maini():
             stu=i['id']
         if st.button('Grade'):
             st.session_state.descriptive=st.session_state.descriptive+1
-            ansd.find({'flag':False,'course':optionm,'ins':st.session_state["userid"],'question':i["question"],'ans':i["ans"]},{'_id':0,'id':1})
-            ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
+            if list(ass.find_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu})) != []:  
+                ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
+                st.sucess('Graded Successfully')
+            else:
+                st.warning('Already Graded')
 
         
     elif page == "Customer Care":
