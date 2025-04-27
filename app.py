@@ -707,7 +707,7 @@ def mains():
 
                         else:
 
-                            st.wafrning("Already Submitted")
+                            st.warning("Already Submitted")
                     
 
     elif page == "Assesment":
