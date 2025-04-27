@@ -692,7 +692,8 @@ def mains():
                     doc=dba.fsa.files.find_one({},{'filename':1})
                     if doc:
                         filename = doc.get('filename', '')
-                        file_base = filename.split('.')[-1]  # filename without extension
+                        file_base = filename.split('.')[-1]
+                        st.write(file_base)  # filename without extension
                         if file_base != st.session_state["userid"]:
 
                             file_data = uploaded_file.read()
