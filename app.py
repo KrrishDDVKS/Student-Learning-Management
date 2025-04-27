@@ -542,13 +542,12 @@ def maini():
         if pdf_files!=[]:
             for file in pdf_files:
                 metadata = file.get("metadata", {})
-                if metadata['course']==optionm and  metadata['option']=='Assignment' and metadata['id']==st.session_state['user_id']:
+                if metadata['course']==optionm and  metadata['option']=='Assignment' and metadata['id']==st.session_state['userid']:
                     module.append(metadata['name'])
         n=m.find({},{"name":1,'_id':0,'course':1,'id':1,'option':1})
 
         if n is not None:
             for f in n:
-                st.write(f)
                 if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['user_id']:
                     module.append(f['name'])
         selected_filename = st.selectbox("Select module",module)
