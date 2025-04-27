@@ -620,8 +620,8 @@ def maini():
             stu=i['id']
         if st.button('Grade'):
             st.session_state.descriptive=st.session_state.descriptive+1
-            if list(ass.find_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu})) != []:  
-                ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
+            if list(ass.find_one({'Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu})) == []:  
+                ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
                 st.sucess('Graded Successfully')
             else:
                 st.warning('Already Graded')
