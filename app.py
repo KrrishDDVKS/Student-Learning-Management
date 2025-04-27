@@ -752,8 +752,7 @@ def mains():
                 am=list(p.find({'id':st.session_state["userid"],'spec':s,'course':c},{"_id":0,'m':1}))
                 im=list(p.find({'id':st.session_state["userid"],'spec':s,'course':c},{"_id":0,'instructor':1}))
                 tm=list(m.find({'id':im[0]['instructor'],'option':'Assesment','course':c},{'_id':0,'tmark':1}))
-                mg=list(ass.find({'course':c,'instructor':im[0]['instructor'],'student':st.session_state["userid"]},{'Marks':1,'_id':0}))
-                st.write(mg)
+                mg=0
                 fg=[i['tmark'] for i in tm]
                 sum=0
                 for i in fg:
@@ -761,8 +760,9 @@ def mains():
 
                 for i in a:
                     st.write(f'{i["Exam"]}: {i["Marks"]}')
+                    mg=mg+i["marks"]
 
-                st.write(f'Total:{(am[0]["m"]/sum)*100}%')
+                st.write(f'Total:{((am[0]["m"]+mg)/sum)*100}%')
                 ma=ag.find({'course':c})
                 for i in ma:
                     st.write(f'Attendance:{i[st.session_state["userid"]]}%')
