@@ -544,7 +544,7 @@ def maini():
                 metadata = file.get("metadata", {})
                 if metadata['course']==optionm and  metadata['option']=='Assignment' and metadata['id']==st.session_state['user_id']:
                     module.append(metadata['name'])
-        n=m.find({},{"name":1})
+        n=m.find({},{"name":1,'_id':0,'course':1,'id':1,'option':1})
 
         if n is not None:
             for f in n:
