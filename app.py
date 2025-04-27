@@ -551,7 +551,7 @@ def maini():
                 if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['userid']:
                     module.append(f['name'])
         selected_filename = st.selectbox("Select module",module)
-        pdf_files = dba.fs.files.find({'filename': {"$regex": selected_filename}}, {"filename": 1})
+        pdf_files = dba.fsa.files.find({'filename': {"$regex": selected_filename}}, {"filename": 1})
         
         
         a=[]
@@ -559,7 +559,7 @@ def maini():
             for i in pdf_files:
                 a.append(i['filename'])  
         selected_filename = st.selectbox("Select a PDF to View",a)
-        file_id = dba.fs.files.find_one({"filename":selected_filename}, {"_id": 1})
+        file_id = dba.fsa.files.find_one({"filename":selected_filename}, {"_id": 1})
         
         if file_id is not None:
             data = fsa.get(file_id['_id']).read()
@@ -689,7 +689,7 @@ def mains():
                 if uploaded_file.type=="application/pdf":
                     st.error("PDF files are not able to dislay on cloud. Please upload a different file type.")
                 else:
-                    doc=fsa.files.find_one({},{'filename':1})
+                    doc=dba.fsa.files.find_one({},{'filename':1})
                     if doc:
                         filename = doc.get('filename', '')
                         file_base = filename.split('.')[-1]  # filename without extension
