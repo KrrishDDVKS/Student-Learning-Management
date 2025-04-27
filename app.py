@@ -126,6 +126,7 @@ def retrival(c,i,o):
     n=list(m.find({'id':i,'option':o},{"name":1}))
     if n!=[]:
         for f in n:
+            st.write(f)
             if f['course']==c and f['id']==i and f['option']==o:
                 module.append(f['name'])
         selected_filename = st.selectbox("Select a file to View",module)
