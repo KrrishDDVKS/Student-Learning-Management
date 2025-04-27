@@ -559,8 +559,8 @@ def maini():
             for i in pdf_files:
                 a.append(i['filename'])  
         selected_filename = st.selectbox("Select a file to View",a)
-        file_id = dba.fsa.files.find_one({"filename":selected_filename}, {"_id": 1})
-        
+        file_id = dba.fs.files.find_one({"filename":selected_filename}, {"_id": 1})
+        st.write(file_id)
         if file_id is not None:
             data = fsa.get(file_id['_id']).read()
             if 'pdf' in selected_filename.split('.'):
