@@ -689,13 +689,16 @@ def mains():
                 if uploaded_file.type=="application/pdf":
                     st.error("PDF files are not able to dislay on cloud. Please upload a different file type.")
                 else:
-                    
-                    if fsa.find_one({},{'filename':1}).split('.')[-1] != st.session_state["userid"]:
+                    doc=fsa.find_one({},{'filename':1})
+                    if doc:
+                        filename = doc.get('filename', '')
+                        file_base = filename.split('.')[-1]  # filename without extension
+                        if file_base != st.session_state["userid"]:
 
-                        file_data = uploaded_file.read()
-                        #display_pdf(file_data)
-                        file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
-                        st.success(f"📁 File saved to MongoDB with ID: {file_id}")
+                            file_data = uploaded_file.read()
+                            #display_pdf(file_data)
+                            file_id = fsa.put(file_data, filename=f'{mas}.{i}.{uploaded_file.name}.{st.session_state["userid"]}')
+                            st.success(f"📁 File saved to MongoDB with ID: {file_id}")
                     
 
     elif page == "Assesment":
