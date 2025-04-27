@@ -551,14 +551,14 @@ def maini():
                 if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['userid']:
                     module.append(f['name'])
         selected_filename = st.selectbox("Select module",module)
-        pdf_files = dba.fsa.files.find({'filename': {"$regex": selected_filename}}, {"filename": 1})
+        pdf_files = dba.fs.files.find({'filename': {"$regex": selected_filename}}, {"filename": 1})
         
         
         a=[]
         if pdf_files is not None:
             for i in pdf_files:
                 a.append(i['filename'])  
-        selected_filename = st.selectbox("Select a PDF to View",a)
+        selected_filename = st.selectbox("Select a file to View",a)
         file_id = dba.fsa.files.find_one({"filename":selected_filename}, {"_id": 1})
         
         if file_id is not None:
