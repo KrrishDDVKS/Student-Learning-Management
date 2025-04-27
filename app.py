@@ -972,7 +972,7 @@ def maina():
                 st.write(f"No documents found with the key: {option}")
 
     elif page == "Course Assign":
-        st.title("Course Registration")
+        st.title("Instructor Assignment to Courses")
         st.write("Welcome to the Course page.")
         documents = collection1.find({}, {"spec": 1, "_id": 0})
         key_values = [doc['spec'] for doc in documents if 'spec' in doc]
