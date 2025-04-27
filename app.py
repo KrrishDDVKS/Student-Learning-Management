@@ -612,19 +612,19 @@ def maini():
             key_values = [doc['course'] for doc in documents if 'course' in doc]
         optionm = st.selectbox("Course",(key_values))
         x=list(ansd.find({'flag':False,'course':optionm,'ins':st.session_state["userid"]},{'_id':0,'question':1,'ans':1,'id':1,'tmark':1}))
-
-        for i in x:
-            st.write(f'{i["question"]}')
-            st.write(f'Ans: {i["ans"]}')
-            st.text_input(f'marks out of {i['tmark']}')
-            stu=i['id']
-        if st.button('Grade'):
-            st.session_state.descriptive=st.session_state.descriptive+1
-            if list(ass.find_one({'Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu})) == []:  
-                ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':st.session_state.mar})
-                st.sucess('Graded Successfully')
-            else:
-                st.warning('Already Graded')
+        if x!=[]:
+            for i in x:
+                st.write(f'{i["question"]}')
+                st.write(f'Ans: {i["ans"]}')
+                dmar=st.text_input(f'marks out of {i['tmark']}')
+                stu=i['id']
+            if st.button('Grade'):
+                st.session_state.descriptive=st.session_state.descriptive+1
+                if ass.find_one({'Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu}) is None:  
+                    ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':dmar})
+                    st.sucess('Graded Successfully')
+                else:
+                    st.warning('Already Graded')
 
         
     elif page == "Customer Care":
