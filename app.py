@@ -616,7 +616,7 @@ def maini():
             for i in x:
                 st.write(f'{i["question"]}')
                 st.write(f'Ans: {i["ans"]}')
-                dmar=st.text_input(f'marks out of {i['tmark']}')
+                dmar=int(st.text_input(f'marks out of {i['tmark']}'),0)
                 stu=i['id']
             if st.button('Grade'):
                 st.session_state.descriptive=st.session_state.descriptive+1
@@ -752,6 +752,8 @@ def mains():
                 am=list(p.find({'id':st.session_state["userid"],'spec':s,'course':c},{"_id":0,'m':1}))
                 im=list(p.find({'id':st.session_state["userid"],'spec':s,'course':c},{"_id":0,'instructor':1}))
                 tm=list(m.find({'id':im[0]['instructor'],'option':'Assesment','course':c},{'_id':0,'tmark':1}))
+                mg=list(ass.find({'course':c,'instructor':im[0]['instructor'],'student':st.session_state["userid"]},{'Marks':1,'_id':0}))
+                st.write(mg)
                 fg=[i['tmark'] for i in tm]
                 sum=0
                 for i in fg:
