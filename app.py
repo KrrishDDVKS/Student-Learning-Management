@@ -548,7 +548,7 @@ def maini():
 
         if n is not None:
             for f in n:
-                if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['user_id']:
+                if f['course']==optionm and  f['option']=='Assignment' and f['id']==st.session_state['userid']:
                     module.append(f['name'])
         selected_filename = st.selectbox("Select module",module)
         pdf_files = dba.fs.files.find({'filename': {"$regex": selected_filename}}, {"filename": 1})
