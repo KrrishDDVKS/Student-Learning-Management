@@ -210,11 +210,11 @@ def retrivala(c,ins):
             if n['option']=='Assesment':
                 if n['choice']=='Descriptive':
                     st.write(n['description'])
-                    ans=st.text_area('Enter the Answer',key='da')
+                    ans=st.text_area('Enter the Answer')
                     if st.button('answer'):
                         ansd.insert_one({'id':st.session_state["userid"],'course':c,'ins':ins,'question':n['description'],'ans':ans,'flag':n['flag']})
                         embedding1 = get_embedding(ans)
-                        st.session_state['da']=''
+                        st.rerun()
                         if n['flag']:
                             embedding2 = get_embedding(n['ans'])
                             similarity_score = cosine_similarity(embedding1, embedding2)
