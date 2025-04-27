@@ -760,7 +760,7 @@ def mains():
 
                 for i in a:
                     st.write(f'{i["Exam"]}: {i["Marks"]}')
-                    mg=mg+i["marks"]
+                    mg=mg+i["Marks"]
 
                 st.write(f'Total:{((am[0]["m"]+mg)/sum)*100}%')
                 ma=ag.find({'course':c})
