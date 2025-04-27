@@ -123,7 +123,7 @@ def retrival(c,i,o):
             metadata = file.get("metadata", {})
             if metadata['course']==c and metadata['id']==i and metadata['option']==o:
                 module.append(metadata['name'])
-    n=list(m.find({'id':i,'option':o},{"name":1}))
+    n=list(m.find({'id':i,'option':o},{"name":1,"_id":0,"course":1,"id":1,"option":1}))
     if n!=[]:
         for f in n:
             st.write(f)
