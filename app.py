@@ -622,7 +622,7 @@ def maini():
                 st.session_state.descriptive=st.session_state.descriptive+1
                 if ass.find_one({'Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu}) is None:  
                     ass.insert_one({'Exam':f'Descriptive{st.session_state.descriptive}','Q':i["question"],'course':optionm,'instructor':st.session_state['userid'],'student':stu,'Marks':dmar})
-                    st.sucess('Graded Successfully')
+                    st.success('Graded Successfully')
                 else:
                     st.warning('Already Graded')
 
