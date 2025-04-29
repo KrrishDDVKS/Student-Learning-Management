@@ -36,6 +36,7 @@ carddata=db["card"]
 ansd=db["Ansd"]
 fs = gridfs.GridFS(db)
 fsa = gridfs.GridFS(dba)
+st.session_state["logged_in"] = False
 # Session state initialization
 if "reg_in" not in st.session_state:
     st.session_state["reg_in"] = False
