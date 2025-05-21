@@ -1,2 +1,2 @@
 # Student-Learning-Management
-Like Canvas
+Like Canvas with LLM Extension as Customer Care, Course Recommender, Professor Recommender (RAG Implementation)
