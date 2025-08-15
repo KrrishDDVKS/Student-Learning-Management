@@ -36,23 +36,22 @@ carddata=db["card"]
 ansd=db["Ansd"]
 fs = gridfs.GridFS(db)
 fsa = gridfs.GridFS(dba)
-st.session_state["logged_in"] = False
 # Session state initialization
 if "reg_in" not in st.session_state:
     st.session_state["reg_in"] = False
-if "logged_in" not  in st.session_state:
+if "logged_in"  not in st.session_state:
     st.session_state["logged_in"] = False
     st.session_state["userid"] = ""
     st.session_state["role"] = ""
-if "messages" not in st.session_state:
+if "messages"  not in st.session_state:
     st.session_state.messages = {}  # Store chat history per user
-if "admin_joined" not  in st.session_state:
+if "admin_joined"  not in st.session_state:
     st.session_state.admin_joined = {}
 if 'mar' not in st.session_state:
     st.session_state.mar=0
 if 'mark' not in st.session_state:
     st.session_state.mark=0
-if 'exam' not  in st.session_state:
+if 'exam' not in st.session_state:
     st.session_state.exam=0
 if 'descriptive' not in st.session_state:
     st.session_state.descriptive=0
@@ -340,7 +339,7 @@ def mainc():
     template=prompt_template, input_variables=["context"])
     
     i=0
-    if st.session_state['userid']  in st.session_state['messages']:
+    if st.session_state['userid'] not in st.session_state['messages']:
         st.session_state['messages'][st.session_state['userid']] = [{"role": "assistant", "content": "Hello! Welcome to customer care. How Can I help you?"}]
         st.session_state.admin_joined[st.session_state['userid']] = False
         i=1    
@@ -350,7 +349,8 @@ def mainc():
     else:
         st.session_state["messages"]=[i for i in sum.find({})][0]
 
-    for msg  in st.session_state.messages[st.session_state['userid']]:
+    for msg in st.session_state.messages[st.session_state['userid']]:
+        
         st.chat_message(msg["role"]).write(msg["content"])
     
     if prompt := st.chat_input():
@@ -1017,7 +1017,7 @@ def maina():
                 st.write(f"No documents found with the key: {option}")
 
     elif page == "Notification":
-        st.session_state["messages"]=[i for i in sum.find({})][0]
+        st.session_state["messages"]=[i for i in sum.find({})]
         st.title("Customer Service")
         mes=[]
         c=cust.find({},{'query':1,'id':1,'_id':0})
