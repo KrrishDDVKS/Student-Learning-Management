@@ -123,8 +123,6 @@ ipython==8.38.0
 isodate==0.7.2
 isort==5.13.2
 itsdangerous==1.1.0
-jedi==0.19.2
-Jinja2==3.0.3
 jmespath==1.0.1
 joblib==1.4.2
 jsf==0.11.2
