@@ -147,7 +147,6 @@ langchain-text-splitters==0.2.2
 langgraph==0.2.45
 langgraph-checkpoint==2.1.2
 langgraph-sdk==0.1.74
-langsmith==0.1.147
 launchdarkly-server-sdk==8.2.1
 libclang==18.1.1
 lightgbm==4.6.0
