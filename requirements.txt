@@ -159,7 +159,7 @@ nest-asyncio==1.6.0
 networkx==3.4.2
 nltk==3.9.1
 numba==0.61.0
-numpy==2.2.6
+numpy
 openai==1.38.0
 openai-clip==1.0.1
 openai-whisper @ git+https://github.com/openai/whisper.git@517a43ecd132a2089d85f4ebc044728a71d49f6e
